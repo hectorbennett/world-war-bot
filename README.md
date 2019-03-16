@@ -18,52 +18,30 @@ The procedure works as follows:
 
 Performing this procedure 10,000 times returns the following rankings:
 
-China: 6907
+Performing this procedure 10,000 times returns the following rankings:
 
-India: 2419
-
-United States: 539
-
-Brazil: 59
-
-Russia: 12
-
-Nigeria: 7
-
-Germany: 7
-
-Pakistan: 7
-
-Ethiopia: 6
-
-United Kingdom: 5
-
-Egypt: 5
-
-Dominican Republic: 4
-
-Democratic Republic of the Congo: 4
-
-Guadeloupe: 3
-
-France: 3
-
-Colombia: 3
-
-Iran: 2
-
-Ivory Coast: 1
-
-Sint Maarten: 1
-
-Poland: 1
-
-South Africa: 1
-
-Turkey: 1
-
-Spain: 1
-
-Kenya: 1
-
-Argentina: 1
+        * China: 6907
+        * India: 2419
+        * United States: 539
+        * Brazil: 59
+ - Russia: 12
+ - Nigeria: 7
+ - Germany: 7
+ - Pakistan: 7
+ - Ethiopia: 6
+ - United Kingdom: 5
+ - Egypt: 5
+ - Dominican Republic: 4
+ - Democratic Republic of the Congo: 4
+ - Guadeloupe: 3
+ - France: 3
+ - Colombia: 3
+ - Iran: 2
+ - Ivory Coast: 1
+ - Sint Maarten: 1
+ - Poland: 1
+ - South Africa: 1
+ - Turkey: 1
+ - Spain: 1
+ - Kenya: 1
+ - Argentina: 1
