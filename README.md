@@ -1,2 +1,2 @@
-# World-War-Bot
+# World War Bot
 Dumb algorithm for finding the ultimate warmonger
