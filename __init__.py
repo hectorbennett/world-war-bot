@@ -2,22 +2,47 @@
 
 This program follows a stupid algorithm to determine the ultimate warmonger
 
-it uses country neighbour and population data from https://github.com/lorey/list-of-countries
+I stole the country data from https://github.com/lorey/list-of-countries
 
 The procedure works as follows:
 
-    - Pick a random country
-    - Pick a random neighbour of that country
-    - Choose a probability of victory for the countries based on relative population
-    - Choose a winner based on a random number choice and the calculated probability of victory
-    - Transfer the loser's population and borders to the winner
+        - Pick a random country
+        - Pick a random neighbour of that country
+        - Choose a probability of victory for the countries based on relative population
+        - Choose a winner based on a random number choice and the calculated probability of victory
+        - Transfer the loser's population and borders to the winner
 
-Repeat until only one country remains.
+    Repeat until only one country remains.
 
-Performing this procedure
+Performing this procedure 10,000 times returns the following rankings:
+
+China: 6907
+India: 2419
+United States: 539
+Brazil: 59
+Russia: 12
+Nigeria: 7
+Germany: 7
+Pakistan: 7
+Ethiopia: 6
+United Kingdom: 5
+Egypt: 5
+Dominican Republic: 4
+Democratic Republic of the Congo: 4
+Guadeloupe: 3
+France: 3
+Colombia: 3
+Iran: 2
+Ivory Coast: 1
+Sint Maarten: 1
+Poland: 1
+South Africa: 1
+Turkey: 1
+Spain: 1
+Kenya: 1
+Argentina: 1
 
 """
-
 
 import os
 import sys
@@ -62,10 +87,17 @@ class Country(object):
         self.neighbours[other.code] = other
 
     def defeat(self, other):
+        """
+        Run if self has defeated other
+        """
+        # Absorb the losing population
         self.population += other.population
+
+        # Adopt its neighbours
         for neighbour in other.neighbours.values():
             self.add_neighbour(neighbour)
-        # self.neighbours.update(other.neighbours)
+
+        # Replace the loser in all the other countries' list of neighbours
         for country in self.world.countries.values():
             if other.code in country.neighbours:
                 country.add_neighbour(self)
@@ -73,6 +105,8 @@ class Country(object):
                 del country.neighbours[other.code]
             except KeyError:
                 pass
+
+        # Finally delete the loser from the world :o
         del self.world.countries[other.code]
         return self
 
@@ -82,7 +116,7 @@ class Country(object):
 
         chance = self.population / float(other.population)
 
-        if self.population >= other.population and random.random() > chance:
+        if self.population >= other.population and chance >= random.random():
             return self.defeat(other)
         return other.defeat(self)
 
@@ -101,13 +135,12 @@ for country in COUNTRIES:
             _earth.add_border(country['alpha_2'], neighbour)
 
 winners = {}
-
-for _ in range(5000):
+for _ in range(10000):
     earth = copy.deepcopy(_earth)
     while earth.countries:
-        random_choice = random.choice(earth.countries.values())
+        random_choice = random.choice(list(earth.countries.values()))
         if random_choice.neighbours:
-            random_neighbour = random.choice(random_choice.neighbours.values())
+            random_neighbour = random.choice(list(random_choice.neighbours.values()))
             winner = random_choice.challenge_neighbour(random_neighbour)
         else:
             del earth.countries[random_choice.code]
@@ -116,5 +149,5 @@ for _ in range(5000):
     except KeyError:
         winners[winner.name] = 1
 
-for country, value in sorted(winners.iteritems()):
-    print('{}: {}'.format(country, value))
+for country in (sorted(winners, key=winners.get, reverse=True)):
+    print('{}: {}'.format(country, winners[country]))
