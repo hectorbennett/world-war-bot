@@ -14,16 +14,12 @@ The procedure works as follows:
 
     Repeat until only one country remains.
 
-
-
 Performing this procedure 10,000 times returns the following rankings:
 
-Performing this procedure 10,000 times returns the following rankings:
-
-        * China: 6907
-        * India: 2419
-        * United States: 539
-        * Brazil: 59
+ - China: 6907
+ - India: 2419
+ - United States: 539
+ - Brazil: 59
  - Russia: 12
  - Nigeria: 7
  - Germany: 7
