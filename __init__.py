@@ -8,8 +8,10 @@ The procedure works as follows:
 
         - Pick a random country
         - Pick a random neighbour of that country
-        - Choose a probability of victory for the countries based on relative population
-        - Choose a winner based on a random number choice and the calculated probability of victory
+        - Choose a probability of victory for the countries based on relative
+          population
+        - Choose a winner based on a random number choice and the calculated
+          probability of victory
         - Transfer the loser's population and borders to the winner
 
     Repeat until only one country remains.
@@ -124,7 +126,11 @@ class Country(object):
 
 _earth = World()
 for country in COUNTRIES:
-    _earth.add_country(country['alpha_2'], country['name'], country['population'])
+    _earth.add_country(
+        country['alpha_2'],
+        country['name'],
+        country['population']
+    )
 
 for country in COUNTRIES:
     for neighbour in country['neighbours']:
@@ -139,7 +145,9 @@ for _ in range(10000):
     while earth.countries:
         random_choice = random.choice(list(earth.countries.values()))
         if random_choice.neighbours:
-            random_neighbour = random.choice(list(random_choice.neighbours.values()))
+            random_neighbour = random.choice(
+                list(random_choice.neighbours.values())
+            )
             winner = random_choice.challenge_neighbour(random_neighbour)
         else:
             del earth.countries[random_choice.code]
